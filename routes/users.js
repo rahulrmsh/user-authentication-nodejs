@@ -8,9 +8,11 @@ router.get('/', function(req, res, next) {
 router.get('/register', function(req, res, next) {
     res.render('register', { 'title': 'Register' });
 });
+router.post('/register', function(req, res, next) {});
 router.get('/login', function(req, res, next) {
     res.render('login', { 'title': 'Login' });
 });
+router.post('/login', function(req, res, next) {});
 router.get('/logout', function(req, res, next) {
     res.render('logout', { 'title': 'Logout' });
 });
