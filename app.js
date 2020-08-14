@@ -13,6 +13,7 @@ var multer = require('multer');
 var upload = multer({ dest: './uploads' });
 var flash = require('connect-flash');
 var mongo = require('mongodb');
+var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var app = express();
