@@ -1,3 +1,9 @@
 extends layout
 
 block content
+  form.form-signin(action="/users/login", method="post", enctype = 'multipart/form-data')
+      .text-center.mb-4
+        h1.h3.mb-3.font-weight-normal Log Out
+        p
+          | Do you really want to leave?
+      button.btn.btn-lg.btn-primary.btn-block(type="submit") Log Out
