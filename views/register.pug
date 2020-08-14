@@ -1,3 +1,26 @@
 extends layout
 
 block content
+    form.form-signin(action="/users/register", method="post", enctype = 'multipart/form-data')
+      .text-center.mb-4
+        img.mb-4(src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/settings-circle-blue-512.png" alt="" width="72" height="72")
+        h1.h3.mb-3.font-weight-normal Register
+        p
+          | Register now to join in with the other members
+      .form-label-group
+        input#inputName.form-control(type="text" placeholder="Name" required="" autofocus="")
+        label(for="inputName") Name
+      .form-label-group
+        input#inputEmail.form-control(type="email" placeholder="Email address" required="" autofocus="")
+        label(for="inputEmail") Email address
+      .form-label-group
+        input#inputUsername.form-control(type="text" placeholder="Username" required="" autofocus="")
+        label(for="inputUsername") Username
+      .form-label-group
+        input#inputPassword.form-control(type="password" placeholder="Password" required="")
+        label(for="inputPassword") Password
+      .form-label-group
+        input#inputCheckPassword.form-control(type="password" placeholder="Check Password" required="")
+        label(for="inputCheckPassword") Check Password
+      button.btn.btn-lg.btn-primary.btn-block(type="submit") Sign in
+      p.mt-5.mb-3.text-muted.text-center © 2020
