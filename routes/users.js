@@ -1,11 +1,9 @@
 var express = require('express');
-var expressValidator = require('express-validator');
-api.use(expressValidator())
-var api = express.Router();
 var router = express.Router();
 var multer = require('multer');
 var upload = multer({ dest: './uploads' });
 
+var User = require('../models/user');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
@@ -31,7 +29,7 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
     req.checkBody('inputUsername', "username field is required").notEmpty();
     req.checkBody('inputPassword', "Password field is required").notEmpty();
     req.checkBody('inputCheckPassword', "Password Incorrect").equals(req.body.inputPassword);
-    req.checkBody('name', "Name field is required").notEmpty();
+
     var errors = req.validationErrors();
     if (errors) {
         res.render('register', {
@@ -39,7 +37,19 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
         });
         console.log(errors);
     } else {
-        console.log('No Errors');
+        var newUser = new User({
+            inputName: inputName,
+            inputEmail: inputEmail,
+            inputPassword: inputPassword,
+            inputUsername: inputUsername,
+            profileimage: profileimage
+        });
+        User.createUser(newUser, function() {
+            if (err) throw err;
+            console.log(user);
+        });
+        res.location('/');
+        res.redirect('/');
     }
 });
 /* GET users listing. */

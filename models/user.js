@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodeauth');
+mongoose.connect('mongodb://localhost/nodeauth', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 var db = mongoose.connection;
 
 var UserSchema = mongoose.Schema({
