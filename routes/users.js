@@ -45,13 +45,11 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
             profileimage: profileimage
         });
         User.createUser(newUser, function() {
-            if (err) {
-                console.log(user);
-                res.redirect(error.pug);
-            }
+            if (err) throw err;
+            console.log(user);
+            res.location('/');
+            res.redirect('/');
         });
-        res.location('/');
-        res.redirect('/');
     }
 });
 /* GET users listing. */
