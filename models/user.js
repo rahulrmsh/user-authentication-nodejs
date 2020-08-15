@@ -23,8 +23,8 @@ var UserSchema = mongoose.Schema({
         type: String
     }
 });
-var User = mongoose.model.exports = mongoose.model('User', UserSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports, createUser = function(newUser, callback) {
+module.exports.createUser = function(newUser, callback) {
     newUser.save(callback);
 }
