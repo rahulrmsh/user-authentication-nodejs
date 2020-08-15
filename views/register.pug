@@ -6,6 +6,10 @@ block content
         h1.h3.mb-3.font-weight-normal Register
         p
           | Register now to join in with the other members
+        ul.errors
+          if errors
+            each error, i in errors
+              div.alert.alert-danger #{error.msg}
       .form-label-group
         input#inputName.form-control(name = 'inputName' type="text" placeholder="Name" required="" autofocus="")
         label(for="inputName") Name
