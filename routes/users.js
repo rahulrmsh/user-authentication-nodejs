@@ -37,7 +37,7 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
         });
         console.log(errors);
     } else {
-        var newUser = new User({
+        var newUser = User({
             inputName: inputName,
             inputEmail: inputEmail,
             inputPassword: inputPassword,
