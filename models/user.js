@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodeauth', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect('mongodb://admin:password@localhost/nodeauth', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 var db = mongoose.connection;
 
 var UserSchema = mongoose.Schema({
@@ -14,9 +14,6 @@ var UserSchema = mongoose.Schema({
         type: String
     },
     inputPassword: {
-        type: String
-    },
-    inputCheckPassword: {
         type: String
     },
     profileimage: {

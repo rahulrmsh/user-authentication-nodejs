@@ -28,7 +28,7 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
     req.checkBody('inputEmail', "Email is required").isEmail();
     req.checkBody('inputUsername', "username field is required").notEmpty();
     req.checkBody('inputPassword', "Password field is required").notEmpty();
-    req.checkBody('inputCheckPassword', "Passwords don't match ").equals(req.body.inputPassword);
+    req.checkBody('inputCheckPassword', "Passwords do not match ").equals(req.body.inputPassword);
 
     var errors = req.validationErrors();
     if (errors) {
@@ -47,9 +47,9 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
         User.createUser(newUser, function() {
             if (err) throw err;
             console.log(user);
-            res.location('/');
-            res.redirect('/');
         });
+        res.location('/');
+        res.redirect('/');
     }
 });
 /* GET users listing. */
