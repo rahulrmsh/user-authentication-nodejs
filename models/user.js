@@ -12,7 +12,7 @@ const connectToMongoDB = () => {
         autoReconnect: true,
     };
 
-    return mongoose.connect('mongodb://user:password@mongodb:27017/nodeauthz', opts);
+    return mongoose.connect('mongodb://user:password@mongodb:27017/nodeauth', opts);
 };
 
 var UserSchema = mongoose.Schema({
