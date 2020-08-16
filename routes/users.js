@@ -44,12 +44,18 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
             inputUsername: inputUsername,
             profileimage: profileimage
         });
-        User.createUser(newUser, function() {
-            if (err) throw err;
-            console.log(user);
-        });
-        res.location('/');
-        res.redirect('/');
+        try {
+
+            User.createUser(newUser, function() {
+                if (err) throw err;
+                console.log(user);
+            });
+            res.location('/');
+            res.redirect('/');
+        } catch (e) {
+            console.log("error");
+            console.log(e.message);
+        }
     }
 });
 /* GET users listing. */
