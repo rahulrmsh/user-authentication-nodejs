@@ -11,20 +11,20 @@ block content
             each error, i in errors
               div.alert.alert-danger #{error.msg}
       .form-label-group
-        input#inputName.form-control(name = 'inputName' type="text" placeholder="Name" required="" autofocus="")
-        label(for="inputName") Name
+        input#name.form-control(name = 'name' type="text" placeholder="Name" required="" autofocus="")
+        label(for="name") Name
       .form-label-group
-        input#inputEmail.form-control(name = 'inputEmail' type="email" placeholder="Email address" required="" autofocus="")
-        label(for="inputEmail") Email address
+        input#email.form-control(name = 'email' type="email" placeholder="Email address" required="" autofocus="")
+        label(for="email") Email address
       .form-label-group
-        input#inputUsername.form-control(name = 'inputUsername' type="text" placeholder="Username" required="" autofocus="")
-        label(for="inputUsername") Username
+        input#username.form-control(name = 'username' type="text" placeholder="Username" required="" autofocus="")
+        label(for="username") Username
       .form-label-group
-        input#inputPassword.form-control(name = 'inputPassword' type="password" placeholder="Password" required="")
-        label(for="inputPassword") Password
+        input#password.form-control(name = 'password' type="password" placeholder="Password" required="")
+        label(for="password") Password
       .form-label-group
-        input#inputCheckPassword.form-control(name = 'inputCheckPassword' type="password" placeholder="Check Password" required="")
-        label(for="inputCheckPassword") Check Password
+        input#password2.form-control(name = 'password2' type="password" placeholder="Check Password" required="")
+        label(for="password2") Check Password
       .form-label-group
         input#profileimage.align-content-center(name = 'profileimage' type="file" accept="image/*" placeholder="Profile Picture" required="")
       button.btn.btn-lg.btn-primary.btn-block(type="submit", name='submit') Sign in

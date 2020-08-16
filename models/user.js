@@ -1,40 +1,104 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodeauth', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
-mongoose.connection.on("open", function(ref) {
-    console.log("\n\n\nConnected to mongo server.\n\n\n");
-    console.log(mongoose.connection.readyState);
-});
+var bcrypt = require('bcryptjs');
+
+mongoose.connect('mongodb://localhost/nodeauth');
+
 var db = mongoose.connection;
-db.on('connected', function() {
-    console.log("\n\n\nConnected to mongo db.\n\n\n");
-});
-mongoose.connection.on("error", function(err) {
-    console.log('\n\n\n\n\n');
-    console.log("Could not connect to mongo server!");
-    console.log(err.message);
-    console.log('\n\n\n\n\n');
-    console.log(err);
-    return console.log('\n\n\n\n\n');
-});
+
+// User Schema
 var UserSchema = mongoose.Schema({
-    inputUsername: {
+    username: {
         type: String,
         index: true
     },
-    inputName: {
+    password: {
         type: String
     },
-    inputEmail: {
+    email: {
         type: String
     },
-    inputPassword: {
+    name: {
         type: String
     },
     profileimage: {
         type: String
     }
 });
+
 var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.getUserById = function(id, callback) {
+    User.findById(id, callback);
+}
+
+module.exports.getUserByUsername = function(username, callback) {
+    var query = { username: username };
+    User.findOne(query, callback);
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback) {
+    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+        callback(null, isMatch);
+    });
+}
+
 module.exports.createUser = function(newUser, callback) {
-    newUser.save(callback);
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
+}
+var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
+
+mongoose.connect('mongodb://localhost/nodeauth');
+
+var db = mongoose.connection;
+
+// User Schema
+var UserSchema = mongoose.Schema({
+    username: {
+        type: String,
+        index: true
+    },
+    password: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    profileimage: {
+        type: String
+    }
+});
+
+var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports.getUserById = function(id, callback) {
+    User.findById(id, callback);
+}
+
+module.exports.getUserByUsername = function(username, callback) {
+    var query = { username: username };
+    User.findOne(query, callback);
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback) {
+    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+        callback(null, isMatch);
+    });
+}
+
+module.exports.createUser = function(newUser, callback) {
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
 }
