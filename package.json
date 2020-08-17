@@ -20,9 +20,9 @@
         "morgan": "~1.9.1",
         "multer": "*",
         "passport": "*",
-        "snappy": "*",
         "passport-http": "*",
         "passport-local": "*",
-        "pug": "*"
+        "pug": "*",
+        "snappy": "*"
     }
 }
