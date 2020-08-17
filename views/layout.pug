@@ -23,6 +23,7 @@ html
             a.nav-link(href="/users/logout") Logout
     main.container(role="main")
       .starter-template
+        != messages()
         block content
         footer
           p.mt-5.mb-3.text-muted.text-center © 2020
