@@ -49,7 +49,7 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
             if (err) throw err;
             console.log(user);
         });
-        req.flash('success', "You're in");
+        req.flash('success', " Registration Successful");
         res.location('/');
         res.redirect('/');
     }
