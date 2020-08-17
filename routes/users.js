@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var multer = require('multer');
 var upload = multer({ dest: './uploads' });
 
@@ -59,7 +61,40 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
 router.get('/login', function(req, res, next) {
     res.render('login', { 'title': 'Login' });
 });
-router.post('/login', function(req, res, next) {});
+router.post('/login',
+    passport.authenticate('local',
+        function(req, res, err) {
+            if (err) {
+                console.log(err);
+            };
+            req.flash('success', "Login Successful");
+            res.redirect('/');
+        }));
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+        done(err, user);
+    });
+});
+passport.use(new LocalStrategy(function(username, password, done) {
+    User.getUserByUsername(username, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+            return done(null, false, { message: 'Unknown User' });
+        }
+        user.comparePassword(password, user.password, function(err, isMatch) {
+            if (err) return done(err);
+            if (isMatch) {
+                return done(null, user);
+            } else {
+                return done(null, false, { message: 'Invalid Password' });
+            }
+        });
+    });
+}));
 
 router.get('/logout', function(req, res, next) {
     res.render('logout', { 'title': 'Logout' });
