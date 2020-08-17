@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var multer = require('multer');
 var upload = multer({ dest: './uploads' });
-
 var User = require('../models/user');
-/* GET users listing. */
+
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
-/* GET and POST register. */
+
 router.get('/register', function(req, res, next) {
     res.render('register', { 'title': 'Register' });
 });
+
 router.post('/register', upload.single('profileimage'), function(req, res, next) {
     var inputName = req.body.inputName;
     var inputEmail = req.body.inputEmail;
@@ -58,7 +58,6 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
     }
 });
 
-/* GET users listing. */
 router.get('/login', function(req, res, next) {
     res.render('login', { 'title': 'Login' });
 });
