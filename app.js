@@ -26,6 +26,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+mongoose.connect('mongodb://localhost:27017/', { useNewUrlParser: true }).
+catch(error => console.log(error));
+
 var usersRouter = require('./routes/users');
 var indexRouter = require('./routes/index');
 // view engine setup
